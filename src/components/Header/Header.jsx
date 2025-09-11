@@ -1,8 +1,13 @@
+"use client"
 import { Bell, Menu, Search, Settings } from 'lucide-react'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function Header() {
+
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
+
     return (
         <header className="h-16 bg-white border-b border-[#F1F3F7] flex items-center justify-between px-4">
             <button

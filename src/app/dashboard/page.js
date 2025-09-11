@@ -1,5 +1,3 @@
-"use client";
-import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Sidebar from "@/components/Global/Sidebar";
@@ -12,7 +10,6 @@ import PropertyCard from "@/components/Global/PropertyCard";
 import Inspection from "@/components/Inspection/Inspection";
 
 export default function TenantDashboard() {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
         <div className="min-h-screen bg-gray-50 flex">
@@ -22,7 +19,12 @@ export default function TenantDashboard() {
             <div className="flex-1 flex flex-col">
                 <Header />
                 <div className="p-5 bg-[#F8F9FC]">
-                    <Banner />
+                    <Banner
+                        imgUrl="/global/banner.png"
+                        title="Tenant Dashboard"
+                        buttonText="Ready to Rent"
+                        buttonUrl="/dashboard"
+                    />
 
                     <main className="flex-1 py-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
                         {/* Chart Card */}

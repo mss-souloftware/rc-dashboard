@@ -9,6 +9,7 @@ import Application from "@/components/Charts/Application";
 import ProfileCard from "@/components/Global/ProfileCard";
 import ApplicationsTable from "@/components/Tables/ApplicationsTable";
 import PropertyCard from "@/components/Global/PropertyCard";
+import Inspection from "@/components/Inspection/Inspection";
 
 export default function TenantDashboard() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -31,6 +32,7 @@ export default function TenantDashboard() {
 
                             {/* Applications Table */}
                             <ApplicationsTable />
+                            <Inspection />
                         </div>
 
                         <div className="col-span-1 space-y-6">

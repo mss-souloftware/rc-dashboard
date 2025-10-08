@@ -22,3 +22,12 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.rdp {
+  --rdp-accent-color: #202A54; /* Tailwind blue-900 */
+  --rdp-background-color: #eff6ff;
+}
+.rdp-day_selected {
+  background-color: var(--rdp-accent-color);
+  color: white;
+}

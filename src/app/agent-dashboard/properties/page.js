@@ -1,21 +1,24 @@
 "use client";
 import Banner from "@/components/Global/Banner";
 import AgentPropertyListCard from "@/components/Global/AgentPropertyListCard";
-import Sidebar from "@/components/Global/Sidebar";
-import Header from "@/components/Header/Header";
+import AgentSidebar from "@/components/Global/AgentSidebar";
+import AgentHeader from "@/components/Header/AgentHeader";
 import Inspection from "@/components/Inspection/Inspection";
 import { ChevronDown } from "lucide-react";
 import React, { useState } from "react";
 
 export default function AgentProperties() {
   const [activeTab, setActiveTab] = useState("listed");
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
+
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      <Sidebar />
+      <AgentSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
 
       {/* Main content */}
       <div className="flex-1 flex flex-col">
-        <Header />
+        <AgentHeader sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
         <div className="p-5 bg-[#F8F9FC]">
           <Banner
             imgUrl="/global/agentList.png"

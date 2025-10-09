@@ -1,5 +1,4 @@
-import { ChevronRight } from "lucide-react";
-import Image from "next/image";
+"use client";
 import Sidebar from "@/components/Global/Sidebar";
 import Header from "@/components/Header/Header";
 import Banner from "@/components/Global/Banner";
@@ -8,16 +7,17 @@ import ProfileCard from "@/components/Global/ProfileCard";
 import ApplicationsTable from "@/components/Tables/ApplicationsTable";
 import PropertyCard from "@/components/Global/PropertyCard";
 import Inspection from "@/components/Inspection/Inspection";
+import { useState } from "react";
 
 export default function TenantDashboard() {
-
+  const [sidebarOpen, setSidebarOpen] = useState(false);
     return (
         <div className="min-h-screen bg-gray-50 flex">
-            <Sidebar />
+            <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
             {/* Main content */}
             <div className="flex-1 flex flex-col">
-                <Header />
+                <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
                 <div className="p-5 bg-[#F8F9FC]">
                     <Banner
                         imgUrl="/global/banner.png"

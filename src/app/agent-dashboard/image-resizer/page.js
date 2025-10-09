@@ -1,12 +1,14 @@
 "use client";
 import Banner from "@/components/Global/Banner";
-import Sidebar from "@/components/Global/Sidebar";
-import Header from "@/components/Header/Header";
+import AgentSidebar from "@/components/Global/AgentSidebar";
+import AgentHeader from "@/components/Header/AgentHeader";
 import React from "react";
 import  {useState} from "react";
 
 export default function ImageResizer() {
   const [image, setImage] = useState(null);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -17,11 +19,11 @@ export default function ImageResizer() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      <Sidebar />
+      <AgentSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
 
       {/* Main content */}
       <div className="flex-1 flex flex-col">
-        <Header />
+        <AgentHeader sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
         <div className="p-5 bg-[#F8F9FC]">
           <Banner
             imgUrl="/global/agentList.png"

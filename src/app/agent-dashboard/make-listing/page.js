@@ -1,6 +1,6 @@
 "use client";
-import Sidebar from "@/components/Global/Sidebar";
-import Header from "@/components/Header/Header";
+import AgentSidebar from "@/components/Global/AgentSidebar";
+import AgentHeader from "@/components/Header/AgentHeader";
 import Step from "@/components/MakeListing/Step";
 import ProgressBar from "@/components/Global/ProgressBar";
 import FormStep from "@/components/MakeListing/FormStep";
@@ -187,6 +187,8 @@ export default function AgentProperties() {
   const [answers, setAnswers] = useState(Array(totalSteps).fill(null));
   const [formData, setFormData] = useState({});
   const [showLastStep, setShowLastStep] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const handleNext = () => {
     if (currentStep < totalSteps - 1) setCurrentStep(currentStep + 1);
     else {
@@ -211,21 +213,28 @@ export default function AgentProperties() {
 
   const current = steps[currentStep];
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      <Sidebar />
+<div className="min-h-screen bg-gray-50 flex">
+  <AgentSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-      {/* Main content */}
-      <div className="flex-1 flex flex-col">
-        <Header />
-        {!showLastStep ? (
-          <>
-            <div className="bg-white py-6 px-3 flex gap-3 items-center">
-              <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
-              <div className="flex gap-1 items-center bottom-2 relative">
-                <span className=" text-lg">1/{steps.length}</span>
-                <button className="bg-white border rounded-4xl text-[#202A54] hover:bg-[#202A54] hover:text-white px-6 py-1 btn ">
-                  save & Exit
-                </button>
+  {/* Main content */}
+  <div className="flex-1 flex flex-col">
+    <AgentHeader sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+    {!showLastStep ? (
+      <>
+
+        <div className="bg-white py-4 px-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 border-b border-gray-100">
+          <div className="flex-1">
+            <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+          </div>
+
+          <div className="flex items-center justify-between sm:justify-end gap-3 flex-wrap">
+            <span className="text-sm sm:text-base text-gray-700 font-medium">
+              {currentStep + 1}/{steps.length}
+            </span>
+            <button className="border border-[#202A54] text-[#202A54] hover:bg-[#202A54] hover:text-white rounded-full px-4 py-1.5 sm:px-5 sm:py-1.5 text-sm sm:text-base transition-all whitespace-nowrap">
+              Save & Exit
+            </button>
               </div>
             </div>
             <main>

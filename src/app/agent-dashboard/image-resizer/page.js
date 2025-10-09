@@ -4,6 +4,7 @@ import AgentSidebar from "@/components/Global/AgentSidebar";
 import AgentHeader from "@/components/Header/AgentHeader";
 import React from "react";
 import  {useState} from "react";
+import {Zap, WandSparkles, Image, ImageUp} from "lucide-react";
 
 export default function ImageResizer() {
   const [image, setImage] = useState(null);
@@ -32,9 +33,9 @@ export default function ImageResizer() {
             buttonText={"Resize"}
           />
           <div className="min-h-screen bg-gray-50 p-10 flex flex-col items-center">
-            {/* Top Section */}
+
             <div className="bg-white w-full max-w-6xl rounded-xl shadow p-8 grid grid-cols-1 lg:grid-cols-2 gap-10">
-              {/* Left - Upload Section */}
+
               <div className="border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center p-10 text-center">
                 {image ? (
                   <img
@@ -45,7 +46,7 @@ export default function ImageResizer() {
                 ) : (
                   <>
                     <div className="w-14 h-14 mb-4 border border-gray-300 rounded-full flex items-center justify-center">
-                      <span className="text-2xl">⬆️</span>
+                      <span className="text-2xl flex justify-center"><ImageUp /></span>
                     </div>
                     <label
                       htmlFor="upload"
@@ -67,7 +68,6 @@ export default function ImageResizer() {
                 )}
               </div>
 
-              {/* Right - Resize Controls */}
               <div className="flex flex-col justify-between space-y-6">
                 <div>
                   <h2 className="text-xl font-semibold text-gray-800 mb-4">
@@ -75,7 +75,6 @@ export default function ImageResizer() {
                   </h2>
 
                   <div className="space-y-4">
-                    {/* Aspect Ratio */}
                     <div>
                       <label className="block text-gray-600 mb-1">
                         Aspect Ratio
@@ -118,7 +117,6 @@ export default function ImageResizer() {
                   </div>
                 </div>
 
-                {/* Bottom Info */}
                 <div className="space-y-2 text-sm text-gray-600 border-t pt-4">
                   <p>
                     <strong>Original Size:</strong> 5MB
@@ -127,10 +125,10 @@ export default function ImageResizer() {
                     <strong>Compressed Size:</strong> 1MB
                   </p>
                   <div className="flex gap-3 pt-3">
-                    <button className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">
+                    <button className="bg-gray-50 border border-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-100">
                       Open in Adobe Express
                     </button>
-                    <button className="bg-[#202A54] text-white px-4 py-2 rounded-lg hover:bg-[#2c3670]">
+                    <button className="bg-[#202A54] text-white px-4 py-2 rounded-full hover:bg-[#2c3670]">
                       Download
                     </button>
                   </div>
@@ -138,10 +136,9 @@ export default function ImageResizer() {
               </div>
             </div>
 
-            {/* Bottom Info Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10 w-full max-w-6xl">
               <div className="bg-white p-6 rounded-xl shadow text-center">
-                <p className="text-xl mb-2">🖼️</p>
+                <p className="text-xl mb-2 flex justify-center"><Image /></p>
                 <h3 className="font-semibold text-gray-800">Perfect Quality</h3>
                 <p className="text-gray-500 text-sm mt-2">
                   The best online image resizer to resize your image at the
@@ -150,7 +147,7 @@ export default function ImageResizer() {
               </div>
 
               <div className="bg-white p-6 rounded-xl shadow text-center">
-                <p className="text-xl mb-2">⚡</p>
+                <p className="text-xl mb-2 flex justify-center"><Zap /></p>
                 <h3 className="font-semibold text-gray-800">Lightning Fast</h3>
                 <p className="text-gray-500 text-sm mt-2">
                   Highly scalable tool that resizes your images within seconds.
@@ -158,7 +155,7 @@ export default function ImageResizer() {
               </div>
 
               <div className="bg-white p-6 rounded-xl shadow text-center">
-                <p className="text-xl mb-2">💡</p>
+                <p className="text-xl mb-2 flex justify-center"><WandSparkles /></p>
                 <h3 className="font-semibold text-gray-800">Easy to Use</h3>
                 <p className="text-gray-500 text-sm mt-2">
                   Upload, adjust, and you’re all set. Simple and efficient.

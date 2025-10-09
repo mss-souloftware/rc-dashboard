@@ -7,7 +7,7 @@ import { useState } from "react";
 import { ChevronDown, ArrowRight, GraduationCap, BusFront, ShoppingCart, Hospital } from "lucide-react";
 import FAQForm from "../Global/FAQForm";
 import ImageSlider from "../Global/ImageSlider";
-import InspectionDates from "../Global/InspectionDates";
+import InspectionDates from "./InspectionDates";
 import OptionCard from "../Global/OptionCard";
 
 export default function ImageStep({
@@ -95,8 +95,8 @@ export default function ImageStep({
       <div>
         <span className="text-green-600">{propertyType}</span>
         <h1 className="text-3xl my-2">{address}</h1>
-        <div className="flex my-5">
-          <span className="flex gap-2 border border-gray-200 p-1">
+        <div className="flex mt-5 mb-8">
+          <span className="flex gap-2 border border-gray-200 py-2 px-3">
             {" "}
             <Image
               src="/global/bedroom.svg"
@@ -106,7 +106,7 @@ export default function ImageStep({
             />
             <span>2 Bedroom</span>
           </span>
-          <span className="flex gap-2 border border-gray-200 p-1">
+          <span className="flex gap-2 border border-gray-200 py-2 px-3">
             {" "}
             <Image
               src="/global/bath.svg"
@@ -114,21 +114,21 @@ export default function ImageStep({
               height={16}
               alt="Bathrooms"
             />
-            <span>2 Bedroom</span>
+            <span>1 Bathroom</span>
           </span>
-          <span className="flex gap-2 border border-gray-200 p-1">
+          <span className="flex gap-2 border border-gray-200 py-2 px-3">
             <Image
               src="/global/parking.svg"
               width={16}
               height={16}
               alt="Parking"
             />
-            <span>2 Bedroom</span>
+            <span>2 Car Parks</span>
           </span>
         </div>
 
         <div>
-          <h3 className="text-lg text-gray-600 my-2">
+          <h3 className="text-lg text-gray-600 my-3">
             Modern 2-Bedroom Family Home on 503/16 Lonsdale Street, Braddon 
           </h3>
           <p className="text-gray-400 my-2 text-sm">{description}</p>
@@ -202,12 +202,12 @@ export default function ImageStep({
 
         <div className="flex flex-col items-center">
           <FAQForm onChange={(answers) => setFaqAnswers(answers)} />
-          <button
+          {/* <button
             onClick={() => console.log(faqAnswers)}
             className="mt-6 bg-[#202A54] text-white px-6 py-2 rounded-xl hover:bg-blue-900"
           >
             Continue
-          </button>
+          </button> */}
         </div>
 
         <div className="w-full max-w-3xl mx-auto p-6">

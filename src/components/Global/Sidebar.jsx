@@ -40,7 +40,6 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
         className={`fixed md:static inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 
         ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 flex flex-col`}
       >
-        {/* Top section */}
         <div className="h-16 flex items-center justify-between border-b border-[#F1F3F7] px-4">
           <Logo />
           <button
@@ -53,7 +52,6 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
         {/* Mobile-only controls */}
         <div className="md:hidden px-4 py-4 border-b border-[#F1F3F7] space-y-4">
-          {/* Search */}
           <div className="flex items-center bg-gray-100 rounded-md px-2 py-2">
             <Search className="h-5 w-5 text-gray-500" />
             <input
@@ -63,7 +61,6 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
             />
           </div>
 
-          {/* Settings & Notifications */}
           <div className="flex items-center justify-between">
             <button className="flex items-center gap-2 text-gray-700 hover:text-[#202A54] transition-colors">
               <Settings className="h-5 w-5" />
@@ -76,14 +73,13 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
           </div>
         </div>
 
-        {/* Navigation links */}
         <nav className="flex-1 px-4 py-6 space-y-3 overflow-y-auto">
           {navItems.map(({ name, icon: Icon, href }) => {
             const isActive = pathname === href;
             return (
               <Link key={name} href={href} onClick={() => setSidebarOpen(false)}>
                 <button
-                  className={`w-full text-left px-3 py-2 rounded-md flex items-center font-medium transition-all
+                  className={`w-full text-left px-3 my-3 py-2 rounded-md flex items-center font-medium transition-all
                     ${
                       isActive
                         ? "bg-[#202A54] text-white"

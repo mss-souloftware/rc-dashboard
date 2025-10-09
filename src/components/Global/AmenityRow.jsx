@@ -14,7 +14,7 @@ export default function AmenityRow({ name, type, distance }) {
     <tr className="border-b border-gray-200">
       <td className="p-3">
         <input
-          type="text"
+          type="text" 
           value={name}
             onChange={e=>setAmenityName(e.target.value)}
 
@@ -27,13 +27,13 @@ export default function AmenityRow({ name, type, distance }) {
         <div className="flex items-center border border-gray-200 bg-white rounded-md px-3 py-2 text-sm">
           {icons[type]}
           <select
-            value={type}
+            value={amenityType}
             onChange={e=>setAmenityType(e.target.value)}
             className="bg-transparent focus:outline-none cursor-pointer text-gray-700"
           >
-            <option>School</option>
-            <option>Bus Stop</option>
-            <option>Mall</option>
+            <option value={"School"}>School</option>
+            <option value={"Bus Stop"}>Bus Stop</option>
+            <option value={"Mall"}>Mall</option>
           </select>
         </div>
       </td>

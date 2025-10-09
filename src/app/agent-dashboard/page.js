@@ -1,6 +1,6 @@
 "use client";
-import Sidebar from "@/components/Global/Sidebar";
-import Header from "@/components/Header/Header";
+import AgentSidebar from "@/components/Global/AgentSidebar";
+import AgentHeader from "@/components/Header/AgentHeader";
 import Application from "@/components/Charts/Application";
 import ApplicationsTable from "@/components/Tables/ApplicationsTable";
 import React, { useState } from "react";
@@ -11,6 +11,8 @@ import AgentPropertyCard from "@/components/Global/AgentPropertyCard";
 
 export default function AgentDashboard() {
   const [activeTab, setActiveTab] = useState("listed");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const data = [
     { name: "Pending", value: 445 },
     { name: "Approved", value: 400 },
@@ -21,11 +23,11 @@ export default function AgentDashboard() {
   const total = data.reduce((acc, entry) => acc + entry.value, 0);
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      <Sidebar />
+      <AgentSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
 
       {/* Main content */}
       <div className="flex-1 flex flex-col">
-        <Header />
+        <AgentHeader sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
         <main className="flex-1 py-6 m-7 grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="col-span-2 space-y-6">

@@ -1,8 +1,8 @@
 "use client";
 import Banner from "@/components/Global/Banner";
 import Image from "next/image";
-import Sidebar from "@/components/Global/Sidebar";
-import Header from "@/components/Header/Header";
+import AgentSidebar from "@/components/Global/AgentSidebar";
+import AgentHeader from "@/components/Header/AgentHeader";
 import AmenityRow from "@/components/Global/AmenityRow";
 import { ChevronDown, X } from "lucide-react";
 import React, { useState } from "react";
@@ -13,6 +13,7 @@ export default function EditProperties() {
   const [bathrooms, setBathrooms] = useState(1);
   const [parking, setParking] = useState(1);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const amenities = [
     { name: "Canberra Grammar School", type: "School", distance: "1.6Km" },
@@ -64,11 +65,11 @@ export default function EditProperties() {
   };
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      <Sidebar />
+      <AgentSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
 
       {/* Main content */}
       <div className="flex-1 flex flex-col">
-        <Header />
+        <AgentHeader sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
         <div className="p-5 bg-[#F8F9FC]">
           <Banner
             imgUrl="/global/agentList.png"

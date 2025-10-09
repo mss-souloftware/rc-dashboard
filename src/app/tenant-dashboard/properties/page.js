@@ -9,13 +9,15 @@ import React, { useState } from "react";
 
 export default function TenantProperties() {
   const [activeTab, setActiveTab] = useState("saved");
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      <Sidebar />
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
       {/* Main content */}
       <div className="flex-1 flex flex-col">
-        <Header />
+        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="p-5 bg-[#F8F9FC]">
           <Banner2
             imgUrl="/global/propHome.png"

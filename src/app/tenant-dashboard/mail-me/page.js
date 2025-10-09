@@ -26,6 +26,8 @@ export default function MailComp() {
   const [selectedSuburbs, setSelectedSuburbs] = useState(["Red Hill"]);
   const allSuburbs = ["Red Hill", "Kingston", "Braddon", "Gungahlin", "Woden"];
   const propertyTypes = ["All", "Apartments", "House", "Townhouse", "Shared"];
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
 
   const toggleSuburb = (suburb) => {
     setSelectedSuburbs((prev) =>
@@ -47,11 +49,11 @@ export default function MailComp() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      <Sidebar />
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
       {/* Main content */}
       <div className="flex-1 flex flex-col">
-        <Header />
+        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="p-5 bg-[#F8F9FC]">
           <Banner2
             imgUrl="/global/mail.png"

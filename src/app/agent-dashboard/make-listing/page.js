@@ -117,27 +117,6 @@ export default function AgentProperties() {
       ],
     },
     {
-      type: "imageReorder",
-      question: "Magic! How does it look ?",
-      questSubtitle: "Drag to reorder",
-      fields: [],
-    },
-    {
-      type: "description",
-      question: "Create A Description",
-      questSubtitle:
-        "Share any extra details about your property—whether it’s a cozy balcony view, a recent renovation, or anything that makes it special. Need help writing? use your templates",
-
-      fields: [{ tags: "abc" }],
-    },
-    {
-      type: "priced",
-      question: "Now, set your price",
-      questSubtitle:
-        "Choose a price that works for you—make it competitive, fair, and ready to attract the right tenants!",
-      fields: [],
-    },
-    {
       type: "image",
       question: "Add some images of your property",
       questSubtitle:
@@ -177,6 +156,28 @@ export default function AgentProperties() {
         },
       ],
     },
+     {
+      type: "description",
+      question: "Create A Description",
+      questSubtitle:
+        "Share any extra details about your property—whether it’s a cozy balcony view, a recent renovation, or anything that makes it special. Need help writing? use your templates",
+
+      fields: [{ tags: "abc" }],
+    },
+    {
+      type: "imageReorder",
+      question: "Magic! How does it look ?",
+      questSubtitle: "Drag to reorder",
+      fields: [],
+    },
+    {
+      type: "priced",
+      question: "Now, set your price",
+      questSubtitle:
+        "Choose a price that works for you—make it competitive, fair, and ready to attract the right tenants!",
+      fields: [],
+    },
+    
   ];
 
   const totalSteps = steps.length;

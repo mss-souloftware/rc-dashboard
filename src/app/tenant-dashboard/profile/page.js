@@ -14,6 +14,79 @@ export default function Profile() {
     push: true,
   });
 
+  const profileItems = [
+    {
+      title: "Photo",
+      desc: "This would be displayed on your profile",
+      content: (
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <Image
+            src="/global/profile.jpg"
+            alt="Profile"
+            width={80}
+            height={80}
+            className="rounded-full"
+          />
+          <div className="flex flex-wrap gap-2">
+            <button className="bg-white text-gray-600 border rounded-full border-gray-400 px-6 py-1">
+              Delete
+            </button>
+            <button className="bg-white border rounded-full text-[#202A54] hover:bg-[#202A54] hover:text-white px-6 py-1">
+              Change
+            </button>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Full Name",
+      desc: "This would be displayed on your profile",
+      content: "Antonio Francki",
+      action: "Edit",
+    },
+    {
+      title: "Full Name",
+      desc: "This would be displayed on your profile",
+      content: (
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <div className="flex flex-col justify-center">
+            <label>Full Name</label>
+            <input
+              className="bg-white p-2 border rounded-lg border-gray-200 w-full"
+              type="password"
+              placeholder="Enter your Name"
+            />
+          </div>
+        </div>
+      ),
+      action: "Save",
+    },
+    {
+      title: "Date of Birth",
+      desc: "This would be displayed on your profile",
+      content: "03 March, 1978",
+      action: "Edit",
+    },
+    {
+      title: "Phone Number",
+      desc: "",
+      content: "+1 (234)- 567-890",
+      action: "Edit",
+    },
+    {
+      title: "Email",
+      desc: "",
+      content: "antonifrancki@gmail.com",
+      action: "Edit",
+    },
+    {
+      title: "Address",
+      desc: "",
+      content: "503/16 Lonsdale Street, Braddon",
+      action: "Edit",
+    },
+  ];
+
   const toggleNotification = (key) => {
     setNotifications({ ...notifications, [key]: !notifications[key] });
   };
@@ -26,7 +99,9 @@ export default function Profile() {
       <div className="flex-1 flex flex-col max-w-full">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="p-4 sm:p-6 lg:p-8 bg-[#F8F9FC] w-full overflow-x-hidden">
-          <h3 className="text-[#202A54] font-semibold text-2xl sm:text-3xl">Profile</h3>
+          <h3 className="text-[#202A54] font-semibold text-2xl sm:text-3xl">
+            Profile
+          </h3>
           <p className="text-gray-500 my-3 text-sm sm:text-base">
             Manage your personal details here
           </p>
@@ -58,57 +133,7 @@ export default function Profile() {
               <h3 className="text-[#202A54] font-semibold p-2 border-b border-gray-200 text-xl">
                 My Profile
               </h3>
-
-              {/* Profile Rows */}
-              {[
-                {
-                  title: "Photo",
-                  desc: "This would be displayed on your profile",
-                  content: (
-                    <div className="flex flex-col sm:flex-row items-center gap-3">
-                      <Image
-                        src="/global/profile.jpg"
-                        alt="Profile"
-                        width={80}
-                        height={80}
-                        className="rounded-full"
-                      />
-                      <div className="flex flex-wrap gap-2">
-                        <button className="bg-white text-gray-600 border rounded-full border-gray-400 px-6 py-1">
-                          Delete
-                        </button>
-                        <button className="bg-white border rounded-full text-[#202A54] hover:bg-[#202A54] hover:text-white px-6 py-1">
-                          Change
-                        </button>
-                      </div>
-                    </div>
-                  ),
-                },
-                {
-                  title: "Full Name",
-                  desc: "Displayed on your profile",
-                  content: "Antonio Francki",
-                  action: "Edit",
-                },
-                {
-                  title: "Date of Birth",
-                  desc: "",
-                  content: "03 March, 1978",
-                  action: "Edit",
-                },
-                {
-                  title: "Email",
-                  desc: "",
-                  content: "antonifrancki@gmail.com",
-                  action: "Edit",
-                },
-                {
-                  title: "Address",
-                  desc: "",
-                  content: "503/16 Lonsdale Street, Braddon",
-                  action: "Edit",
-                },
-              ].map((item, i) => (
+              {profileItems.map((item, i) => (
                 <div
                   key={i}
                   className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-start p-3 border-b border-gray-200"
@@ -122,11 +147,18 @@ export default function Profile() {
                   <div className="text-[#202A54] font-semibold break-words">
                     {item.content}
                   </div>
-                  {item.action && (
-                    <div className="text-[#202A54] hover:underline font-semibold cursor-pointer">
-                      {item.action}
-                    </div>
-                  )}
+                  {item.action &&
+                    (item.action === "Edit" ? (
+                      <div className="text-[#202A54] hover:underline font-semibold cursor-pointer">
+                        {item.action}
+                      </div>
+                    ) : (
+                      <div className="mt-3">
+                        <button className="bg-white border rounded-full text-[#202A54] hover:bg-[#202A54] hover:text-white px-6 py-1">
+                          Save
+                        </button>
+                      </div>
+                    ))}
                 </div>
               ))}
             </div>
@@ -139,6 +171,18 @@ export default function Profile() {
                 Security
               </h3>
 
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 p-3 border-b border-gray-200">
+                <div>
+                  <h3 className="text-[#202A54] text-lg">Password</h3>
+                  <span className="text-sm text-gray-600">
+                    Last Updated 2 months ago
+                  </span>
+                </div>
+                <div className=" text-[#202A54] hover:underline font-semibold cursor-pointer">
+                  Change Password
+                </div>
+                <div></div>
+              </div>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 p-3 border-b border-gray-200">
                 <div>
                   <h3 className="text-[#202A54] text-lg">Password</h3>
@@ -170,6 +214,18 @@ export default function Profile() {
                   </button>
                 </div>
               </div>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 p-3 border-b border-gray-200">
+                <div>
+                  <h3 className="text-[#202A54] text-lg">Account</h3>
+                  <span className="text-sm text-gray-600">
+                    Deactivate Your Account
+                  </span>
+                </div>
+                <div className=" text-[#202A54] hover:underline font-semibold cursor-pointer">
+                  Deactivate
+                </div>
+                <div></div>
+              </div>
             </div>
           )}
 
@@ -177,7 +233,9 @@ export default function Profile() {
           {activeTab === "notifications" && (
             <div className="mt-8 py-4 bg-[#F9FAFB] rounded-xl text-[#1E293B]">
               <div className="px-4 space-y-6">
-                <h2 className="text-lg font-semibold">Notification Preferences</h2>
+                <h2 className="text-lg font-semibold">
+                  Notification Preferences
+                </h2>
                 {["tenant", "payment", "reminders"].map((opt) => (
                   <label
                     key={opt}
@@ -227,7 +285,9 @@ export default function Profile() {
                         checked={value}
                         onChange={() => toggleNotification(key)}
                       />
-                      <span className="font-medium capitalize">{key} Notifications</span>
+                      <span className="font-medium capitalize">
+                        {key} Notifications
+                      </span>
                     </label>
                   ))}
                 </div>

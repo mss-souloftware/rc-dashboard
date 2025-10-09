@@ -27,9 +27,7 @@ export default function InspectionDates() {
         Dates for Inspection
       </h2>
 
-      {/* Input Row */}
       <div className="flex flex-wrap gap-4 bg-white items-center border border-gray-200 rounded-lg px-4 py-3 mb-8">
-        {/* From */}
         <div className="flex items-center gap-3 border-r border-gray-200 pr-4">
           <div>
             <p className="text-xs text-gray-500">From</p>
@@ -40,7 +38,7 @@ export default function InspectionDates() {
           <AiOutlineCalendar className="text-gray-500 text-xl cursor-pointer" />
         </div>
 
-        {/* To */}
+
         <div className="flex items-center gap-3 border-r border-gray-200 pr-4">
           <div>
             <p className="text-xs text-gray-500">To</p>
@@ -51,7 +49,6 @@ export default function InspectionDates() {
           <AiOutlineCalendar className="text-gray-500 text-xl cursor-pointer" />
         </div>
 
-        {/* Button */}
         <button
           onClick={handleAddToCalendar}
           className="ml-auto bg-white border border-gray-300 text-gray-700 text-sm font-medium px-5 py-2.5 rounded-full hover:bg-gray-50 transition"
@@ -60,7 +57,6 @@ export default function InspectionDates() {
         </button>
       </div>
 
-      {/* Functional Calendar */}
       <div className="flex justify-center">
         <DayPicker
           mode="range"

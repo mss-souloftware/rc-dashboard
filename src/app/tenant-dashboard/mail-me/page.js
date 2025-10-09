@@ -2,7 +2,7 @@
 import Banner2 from "@/components/Global/Banner2";
 import Sidebar from "@/components/Global/Sidebar";
 import Header from "@/components/Header/Header";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import {
   HomeIcon,
@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 
 export default function MailComp() {
-  const [selectedType, setSelectedType] = useState("Apartments");
+  const [selectedTypes, setSelectedTypes] = useState("Apartments");
   const [minPrice, setMinPrice] = useState(150);
   const [maxPrice, setMaxPrice] = useState(450);
   const [bedrooms, setBedrooms] = useState(1);
@@ -25,9 +25,100 @@ export default function MailComp() {
   const [parking, setParking] = useState(1);
   const [selectedSuburbs, setSelectedSuburbs] = useState(["Red Hill"]);
   const allSuburbs = ["Red Hill", "Kingston", "Braddon", "Gungahlin", "Woden"];
-  const propertyTypes = ["All", "Apartments", "House", "Townhouse", "Shared"];
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+  const TYPES = [
+    { name: "All", icon: HomeIcon },
+    { name: "Apartments", icon: Building },
+    { name: "House", icon: HomeIcon },
+    { name: "Townhouse", icon: Building },
+    { name: "Shared", icon: Users },
+  ];
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const MIN = 150;
+  const MAX = 1400;
+  const STEP = 10;
 
+  const trackRef = useRef(null);
+  const activeThumbRef = useRef(null);
+
+  const valueToPercent = (value) => ((value - MIN) / (MAX - MIN)) * 100;
+
+  const startDrag = (thumb) => (e) => {
+    e.preventDefault();
+    activeThumbRef.current = thumb;
+    window.addEventListener("mousemove", handleMove);
+    window.addEventListener("touchmove", handleMove, { passive: false });
+    window.addEventListener("mouseup", endDrag);
+    window.addEventListener("touchend", endDrag);
+  };
+
+  const handleMove = (e) => {
+    if (!activeThumbRef.current) return;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const track = trackRef.current;
+    if (!track) return;
+    const rect = track.getBoundingClientRect();
+    let ratio = (clientX - rect.left) / rect.width;
+    ratio = Math.max(0, Math.min(1, ratio));
+    let value = Math.round((MIN + ratio * (MAX - MIN)) / STEP) * STEP;
+    value = Math.max(MIN, Math.min(MAX, value));
+
+    if (activeThumbRef.current === "min") {
+      const clamped = Math.min(value, maxPrice - STEP);
+      setMinPrice(clamped);
+    } else {
+      const clamped = Math.max(value, minPrice + STEP);
+      setMaxPrice(clamped);
+    }
+  };
+
+  const endDrag = () => {
+    activeThumbRef.current = null;
+    window.removeEventListener("mousemove", handleMove);
+    window.removeEventListener("touchmove", handleMove);
+    window.removeEventListener("mouseup", endDrag);
+    window.removeEventListener("touchend", endDrag);
+  };
+
+  const handleTrackClick = (e) => {
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const track = trackRef.current;
+    if (!track) return;
+    const rect = track.getBoundingClientRect();
+    let ratio = (clientX - rect.left) / rect.width;
+    ratio = Math.max(0, Math.min(1, ratio));
+    let value = Math.round((MIN + ratio * (MAX - MIN)) / STEP) * STEP;
+    value = Math.max(MIN, Math.min(MAX, value));
+
+    if (Math.abs(value - minPrice) <= Math.abs(value - maxPrice)) {
+      setMinPrice(Math.min(value, maxPrice - STEP));
+    } else {
+      setMaxPrice(Math.max(value, minPrice + STEP));
+    }
+  };
+
+  const onMinInputChange = (v) => {
+    const n = Math.round(Number(v) / STEP) * STEP || MIN;
+    const clamped = Math.min(Math.max(n, MIN), maxPrice - STEP);
+    setMinPrice(clamped);
+  };
+
+  const onMaxInputChange = (v) => {
+    const n = Math.round(Number(v) / STEP) * STEP || MAX;
+    const clamped = Math.max(Math.min(n, MAX), minPrice + STEP);
+    setMaxPrice(clamped);
+  };
+
+  useEffect(() => {
+    return () => {
+      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("touchmove", handleMove);
+      window.removeEventListener("mouseup", endDrag);
+      window.removeEventListener("touchend", endDrag);
+    };
+  }, []);
+
+  const leftPct = valueToPercent(minPrice);
+  const rightPct = valueToPercent(maxPrice);
 
   const toggleSuburb = (suburb) => {
     setSelectedSuburbs((prev) =>
@@ -35,16 +126,6 @@ export default function MailComp() {
         ? prev.filter((s) => s !== suburb)
         : [...prev, suburb]
     );
-  };
-
-  const handleMinChange = (e) => {
-    const value = Math.min(+e.target.value, maxPrice - 10);
-    setMinPrice(value);
-  };
-
-  const handleMaxChange = (e) => {
-    const value = Math.max(+e.target.value, minPrice + 10);
-    setMaxPrice(value);
   };
 
   return (
@@ -70,29 +151,33 @@ export default function MailComp() {
                     Property type
                   </h3>
 
-                  {[
-                    { name: "All", icon: HomeIcon },
-                    { name: "Apartments", icon: Building2 },
-                    { name: "House", icon: HomeIcon },
-                    { name: "Townhouse", icon: Building },
-                    { name: "Shared", icon: Users },
-                  ].map(({ name, icon: Icon }) => (
-                    <label
-                      key={name}
-                      className={`flex items-center gap-3 p-2 rounded cursor-pointer hover:bg-gray-50 ${
-                        selectedType === name ? "bg-gray-100 font-medium" : ""
-                      }`}
-                    >
-                      <input
-                        className="accent-[#202A54]"
-                        type="checkbox"
-                        checked={selectedType === name}
-                        onChange={() => setSelectedType(name)}
-                      />
-                      <Icon className="w-5 h-5 text-gray-600" />
-                      <span>{name}</span>
-                    </label>
-                  ))}
+                  <div className="flex flex-col gap-1">
+                    {TYPES.map(({ name, icon: Icon }) => (
+                      <label
+                        key={name}
+                        className={`flex items-center gap-3 p-2 rounded cursor-pointer hover:bg-gray-50 ${
+                          selectedTypes.includes(name)
+                            ? "bg-gray-100 font-medium"
+                            : ""
+                        }`}
+                      >
+                        <input
+                          className="accent-[#202A54]"
+                          type="checkbox"
+                          checked={selectedTypes.includes(name)}
+                          onChange={() =>
+                            setSelectedTypes((prev) =>
+                              prev.includes(name)
+                                ? prev.filter((t) => t !== name)
+                                : [...prev, name]
+                            )
+                          }
+                        />
+                        <Icon className="w-5 h-5 text-gray-600" />
+                        <span>{name}</span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
 
                 <div>
@@ -102,83 +187,77 @@ export default function MailComp() {
                   </h3>
 
                   <div className="relative pt-4 pb-2">
-                    <div className="relative h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div
+                      ref={trackRef}
+                      className="relative h-3 bg-gray-200 rounded-full"
+                      onMouseDown={handleTrackClick}
+                      onTouchStart={(e) => {
+                        e.preventDefault();
+                        handleTrackClick(e);
+                      }}
+                      role="slider"
+                      aria-label="Price range"
+                    >
                       <div
-                        className="absolute h-2 bg-[#202A54] rounded-full"
+                        className="absolute h-3 bg-[#202A54] rounded-full"
                         style={{
-                          left: `${
-                            ((Math.max(minPrice, 150) - 150) / (1400 - 150)) *
-                            100
-                          }%`,
-                          right: `${
-                            100 -
-                            ((Math.min(maxPrice, 1400) - 150) / (1400 - 150)) *
-                              100
-                          }%`,
+                          left: `${leftPct}%`,
+                          width: `${Math.max(0, rightPct - leftPct)}%`,
                         }}
-                      ></div>
+                      />
+                      <button
+                        type="button"
+                        onMouseDown={startDrag("min")}
+                        onTouchStart={(e) => {
+                          e.preventDefault();
+                          startDrag("min")(e);
+                        }}
+                        className="absolute -top-2 w-6 h-6 rounded-full bg-white border shadow flex items-center justify-center -translate-x-1/2 touch-manipulation"
+                        style={{
+                          left: `${leftPct}%`,
+                          zIndex: activeThumbRef.current === "min" ? 50 : 30,
+                        }}
+                        aria-label="Minimum price"
+                      >
+                        <div className="w-2 h-2 bg-[#202A54] rounded-full"></div>
+                      </button>
+
+                      <button
+                        type="button"
+                        onMouseDown={startDrag("max")}
+                        onTouchStart={(e) => {
+                          e.preventDefault();
+                          startDrag("max")(e);
+                        }}
+                        className="absolute -top-2 w-6 h-6 rounded-full bg-white border shadow flex items-center justify-center -translate-x-1/2 touch-manipulation"
+                        style={{
+                          left: `${rightPct}%`,
+                          zIndex: activeThumbRef.current === "max" ? 50 : 40,
+                        }}
+                        aria-label="Maximum price"
+                      >
+                        <div className="w-2 h-2 bg-[#202A54] rounded-full"></div>
+                      </button>
                     </div>
 
-                    <input
-                      type="range"
-                      min="150"
-                      max="1400"
-                      step="10"
-                      value={minPrice}
-                      onChange={(e) =>
-                        setMinPrice(
-                          Math.min(
-                            Math.max(Number(e.target.value), 150),
-                            maxPrice - 10
-                          )
-                        )
-                      }
-                      className="absolute w-full top-3 accent-[#202A54]"
-                      style={{ zIndex: 3 }}
-                    />
-                    <input
-                      type="range"
-                      min="150"
-                      max="1400"
-                      step="10"
-                      value={maxPrice}
-                      onChange={(e) =>
-                        setMaxPrice(
-                          Math.max(
-                            Math.min(Number(e.target.value), 1400),
-                            minPrice + 10
-                          )
-                        )
-                      }
-                      className="absolute w-full top-3 accent-[#202A54]"
-                      style={{ zIndex: 4 }}
-                    />
-
-                    <div className="flex justify-between text-sm text-gray-500 mt-8">
+                    <div className="flex justify-between text-sm text-gray-500 mt-6">
                       <span>${minPrice}/pw</span>
                       <span>${maxPrice}/pw</span>
                     </div>
                   </div>
-
-                  <div className="flex justify-between gap-4 mt-4">
+                  <div className="flex flex-col sm:flex-row justify-between gap-4 mt-4">
                     <div className="flex flex-col w-full">
                       <label className="text-xs text-gray-500 mb-1">
                         Min Price ($/pw)
                       </label>
                       <input
+                        inputMode="numeric"
                         type="number"
-                        min="150"
-                        max={maxPrice - 10}
-                        step="10"
+                        min={MIN}
+                        max={maxPrice - STEP}
+                        step={STEP}
                         value={minPrice}
-                        onChange={(e) =>
-                          setMinPrice(
-                            Math.min(
-                              Math.max(Number(e.target.value), 150),
-                              maxPrice - 10
-                            )
-                          )
-                        }
+                        onChange={(e) => onMinInputChange(e.target.value)}
                         className="border rounded-md text-sm px-3 py-2 w-full"
                       />
                     </div>
@@ -187,19 +266,13 @@ export default function MailComp() {
                         Max Price ($/pw)
                       </label>
                       <input
+                        inputMode="numeric"
                         type="number"
-                        min={minPrice + 10}
-                        max="1400"
-                        step="10"
+                        min={minPrice + STEP}
+                        max={MAX}
+                        step={STEP}
                         value={maxPrice}
-                        onChange={(e) =>
-                          setMaxPrice(
-                            Math.max(
-                              Math.min(Number(e.target.value), 1400),
-                              minPrice + 10
-                            )
-                          )
-                        }
+                        onChange={(e) => onMaxInputChange(e.target.value)}
                         className="border rounded-md text-sm px-3 py-2 w-full"
                       />
                     </div>

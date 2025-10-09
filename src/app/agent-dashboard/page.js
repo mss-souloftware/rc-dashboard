@@ -33,7 +33,7 @@ export default function AgentDashboard() {
           <div className="col-span-2 space-y-6">
             <h3 className="text-[#202A54] font-semibold text-2xl">Overview</h3>
             <div className="flex items-center justify-around gap-7">
-              <div className="relative bg-green-600 text-white rounded-2xl p-5 w-55 shadow-md">
+              <div className="relative bg-green-600 text-white rounded-2xl px-5 py-10 w-70 shadow-md">
 
                 <div className="absolute top-3 left-3 bg-green-700 p-2 rounded-lg">
                   <Eye className="w-5 h-5 text-white" />
@@ -49,7 +49,7 @@ export default function AgentDashboard() {
                   <h2 className="text-2xl font-bold mt-1">1321</h2>
                 </div>
               </div>
-              <div className="relative bg-[#2f3a68] text-white rounded-2xl p-5 w-55 shadow-md">
+              <div className="relative bg-[#2f3a68] text-white rounded-2xl px-5 py-10 w-70 shadow-md">
 
                 <div className="absolute top-3 left-3 bg-[#2f3a68] p-2 rounded-lg">
                   <Eye className="w-5 h-5 text-white" />
@@ -65,7 +65,7 @@ export default function AgentDashboard() {
                   <h2 className="text-2xl font-bold mt-1">346</h2>
                 </div>
               </div>
-              <div className="relative bg-[#55a23c] text-white rounded-2xl p-5 w-55 shadow-md">
+              <div className="relative bg-[#55a23c] text-white rounded-2xl px-5 py-10 w-70 shadow-md">
                 <div className="absolute top-3 left-3 bg-[#55a23c] p-2 rounded-lg">
                   <Eye className="w-5 h-5 text-white" />
                 </div>

@@ -20,7 +20,7 @@ export default function PriceStep({ question, questSubtitle, fields }) {
       {/* Weekly Rent Section */}
       <div className="text-center mb-6">
         <div className="flex items-center justify-center gap-2">
-          <h1 className="text-4xl font-bold text-gray-900">${weeklyRent}</h1>
+          <h1 className="text-6xl font-semibold text-gray-900">${weeklyRent}</h1>
           <span className="text-gray-600 text-xl">/ week</span>
           <Pencil className="text-gray-400 w-5 h-5 cursor-pointer hover:text-gray-600" />
         </div>
@@ -44,7 +44,6 @@ export default function PriceStep({ question, questSubtitle, fields }) {
         </span>
       </div>
 
-      {/* Earnings */}
       <div className="flex justify-between items-center mt-4 bg-white border border-gray-200 rounded-xl px-5 py-3">
         <p className="text-gray-600 font-medium">You earn</p>
         <p className="text-gray-800 font-semibold">
@@ -53,13 +52,11 @@ export default function PriceStep({ question, questSubtitle, fields }) {
         </p>
       </div>
 
-      {/* Rental Yield */}
       <p className="text-gray-800 mt-8 text-sm">
         “How many weeks can you afford 0% rental yield?”{" "}
         <span className="text-red-500">*</span>
       </p>
 
-      {/* Payment Methods */}
       <div className="flex gap-3 mt-4">
         <img src="/global/visa.png" alt="Visa" className="w-14 h-auto border rounded-md p-1" />
         <img src="/global/mastercard.png" alt="Mastercard" className="w-14 h-auto border rounded-md p-1" />
@@ -67,10 +64,10 @@ export default function PriceStep({ question, questSubtitle, fields }) {
         <img src="/global/applepay.png" alt="ApplePay" className="w-14 h-auto border rounded-md p-1" />
       </div>
 
-      {/* Credit Card Form */}
-      <form className="mt-6 space-y-4 p-5 rounded-2xl border border-gray-300">
+
+      <form className="mt-6 space-y-4 p-5 rounded-2xl border bg-[#f6f7f9] border-gray-300">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-bold text-gray-700 mb-1">
             Cardholder name <span className="text-red-500">*</span>
           </label>
           <input
@@ -82,7 +79,7 @@ export default function PriceStep({ question, questSubtitle, fields }) {
 
         <div className="grid grid-cols-4 gap-3">
           <div className="col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-bold text-gray-700 mb-1">
               Card number <span className="text-red-500">*</span>
             </label>
             <input
